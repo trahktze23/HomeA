@@ -9,24 +9,7 @@
 
 <script>
 import Room from '@/components/Room';
-
-const rooms = [
-  {
-    name: 'bucatarie',
-    id: 'bucatarie',
-    temp: 15,
-  },
-  {
-    name: 'living',
-    id: 'living',
-    temp: 25,
-  },
-  // {
-  //   name: 'dormitor',
-  //   id: 'dormitor',
-  //   temp: 23,
-  // },
-];
+import config from '@/config';
 
 export default {
   name: 'Test',
@@ -35,7 +18,7 @@ export default {
   },
   data() {
     return {
-      rooms,
+      rooms: config.rooms,
     };
   },
 };
