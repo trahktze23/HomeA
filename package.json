@@ -5,10 +5,16 @@
   "main": "test.js",
   "dependencies": {
     "babel-eslint": "^10.0.1",
+    "body-parser": "^1.18.3",
     "chalk": "^2.4.1",
+    "cookie-parser": "^1.4.3",
     "cors": "^2.8.5",
     "express": "^4.16.4",
+    "express-session": "^1.15.6",
+    "morgan": "^1.9.1",
     "mysql": "^2.16.0",
+    "pg": "^7.7.1",
+    "sequelize": "^4.41.2",
     "vue": "^2.5.17",
     "ws": "^6.1.0"
   },
