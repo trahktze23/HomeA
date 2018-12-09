@@ -35,27 +35,27 @@ const router = new Router({
 
 // router.beforeEach((to, from, next) => next());
 
-router.beforeEach((to, from, next) => {
-  // console.log('beforeEach', from, to);
-
-  // redirect to login page if not logged in and trying to access a restricted page
-  // add pages for public access
-  const publicPages = ['/login'];
-  // publicPages.push('/rooms');
-
-  const authRequired = !publicPages.includes(to.path);
-  // const loggedIn = localStorage.getItem('user');
-  if (authRequired && !loginService.isLoggedIn()) {
-    console.log('111111111111');
-    return next('/login');
-    // next('/login');
-  }
-  console.log('55555555555555');
-  return next();
-  // else if (from.path === '/login' || to.path === '/login') {
-  //   return next('/rooms');
-  // }
-});
+// router.beforeEach((to, from, next) => {
+//   // console.log('beforeEach', from, to);
+//
+//   // redirect to login page if not logged in and trying to access a restricted page
+//   // add pages for public access
+//   const publicPages = ['/login'];
+//   // publicPages.push('/rooms');
+//
+//   const authRequired = !publicPages.includes(to.path);
+//   // const loggedIn = localStorage.getItem('user');
+//   if (authRequired && !loginService.isLoggedIn()) {
+//     console.log('111111111111');
+//     return next('/login');
+//     // next('/login');
+//   }
+//   console.log('55555555555555');
+//   return next();
+//   // else if (from.path === '/login' || to.path === '/login') {
+//   //   return next('/rooms');
+//   // }
+// });
 
 
 export default router;
