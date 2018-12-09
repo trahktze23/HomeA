@@ -2,6 +2,7 @@
 <div class="hello">
   <room v-for="room in rooms"
     v-bind:key="room.id"
+    v-bind:name="room.name"
     v-bind:currentTemp="room.temp">
   </room>
 </div>
@@ -10,6 +11,11 @@
 <script>
 import Room from '@/components/Room';
 import config from '@/config';
+// import webSockerService
+
+// setInterval(function(){
+//   config.rooms[0].temp += 1;
+// }, 5000);
 
 export default {
   name: 'Test',

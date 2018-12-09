@@ -3,7 +3,7 @@
   <div class="row">
     <div class="column left"><span class="dot" style="background:red;"></span></div>
     <div class="column middle">
-      <span>Living</span>
+      <span>{{name}}</span>
     </div>
     <div class="column right">
       <div style="float:right;">
@@ -40,16 +40,15 @@
 <script>
 export default {
   name: 'Room',
-  props: ['currentTemp'],
+  props: ['currentTemp', 'name'],
   data() {
     return {
-      testData: ' ~data~ ',
       tempSet: 0, // initial temp setted
-      // currentTemp: 13.5,
     };
   },
   methods: {
     changeTemp(type) {
+      console.log('data is changed >>', this.tempSet);
       this.tempSet = (type === 'add') ? this.tempSet += 0.5 : this.tempSet -= 0.5;
     },
   },

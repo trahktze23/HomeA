@@ -1,4 +1,8 @@
 <template>
+
+<!-- <link rel="stylesheet" href="./font-awesome-4.7.0/font-awesome-4.7.0/font-awesome.min.css" >   -->
+
+
 <div class="topnav" id="myTopnav">
   <a href="#home"><i class="fa fa-fw fa-home"></i> Home</a>
   <a href="#fisiere"><i class="fa fa-fw fa-folder"> </i> Fisiere</a>

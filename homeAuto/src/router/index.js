@@ -2,14 +2,14 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import HomePage from '@/components/HomePage';
 import LoginPage from '@/components/Login';
-import loginService from '@/services/login.service';
+// import loginService from '@/services/login.service';
 
 
 Vue.use(Router);
 
 // export default new Router({
 const router = new Router({
-  // modeS: 'history',
+  mode: 'history',
   routes: [
     {
       path: '/login',

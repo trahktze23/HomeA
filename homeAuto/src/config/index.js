@@ -1,6 +1,7 @@
 
 const baseUrl = 'http://localhost:8080'; // DEV ONLY
 const restUrl = '';
+const wsUrl = 'ws://localhost:8082';
 
 
 const config = {
@@ -8,13 +9,13 @@ const config = {
   rooms: [
     {
       name: 'bucatarie',
-      id: 'bucatarie',
-      temp: 15,
+      id: '28-000009b7936f',
+      temp: 'X',
     },
     {
       name: 'living',
       id: 'living',
-      temp: 25,
+      temp: 'X',
     },
     // {
     //   name: 'dormitor',
@@ -25,6 +26,7 @@ const config = {
   userStorage: localStorage,
   baseUrl,
   restUrl,
+  wsUrl, // webSocket url
 };
 
 export default config;
