@@ -11,11 +11,30 @@
 <script>
 import Room from '@/components/Room';
 import config from '@/config';
+// import ws from '@/services/websocket.service';
 // import webSockerService
 
 // setInterval(function(){
 //   config.rooms[0].temp += 1;
 // }, 5000);
+// event emmited when connected
+const ws = new WebSocket(config.wsUrl);
+ws.onopen = () => {
+  console.log('websocket is connected ...');
+  // sending a send event to websocket server
+  ws.send('connected');
+};
+// event emmited when receiving message
+ws.onmessage = (ev) => {
+  console.log('message', ev);
+  config.rooms[0].temp = ev.data;
+};
+ws.onerror = (event) => {
+  console.error('WebSocket error observed:', event);
+};
+ws.onclose = (event) => {
+  console.log('WebSocket is closed now.', event);
+};
 
 export default {
   name: 'Test',

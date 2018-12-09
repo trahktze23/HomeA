@@ -1,7 +1,7 @@
 
 const baseUrl = 'http://localhost:8080'; // DEV ONLY
 const restUrl = '';
-const wsUrl = 'ws://localhost:8082';
+const wsUrl = 'ws://danielsorinungureanu.go.ro:8080';
 
 
 const config = {

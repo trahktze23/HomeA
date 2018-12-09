@@ -1,6 +1,7 @@
 <template>
 
-<!-- <link rel="stylesheet" href="./font-awesome-4.7.0/font-awesome-4.7.0/font-awesome.min.css" >   -->
+<!-- <link rel="stylesheet" href="./font-awesome-4.7.0/
+font-awesome-4.7.0/font-awesome.min.css" >   -->
 
 
 <div class="topnav" id="myTopnav">
