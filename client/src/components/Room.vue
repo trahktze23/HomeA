@@ -15,7 +15,7 @@
   </div>
 
   <div class="temp">
-    <span> {{currentTemp}} </span> &#8451;
+    <span> {{ currentTemp | number:0 }} </span> &#8451;
   </div>
 
   <div class="handle-counter" id="handleCounter">
@@ -26,8 +26,8 @@
     <input
       v-model= "tempSet"
       type="number"
-      min="1"
-      max="45"
+      min="10"
+      max="30"
       step="0.5">
     <button v-on:click="changeTemp('add')"
     class="counter-minus btn btn-primary">
@@ -38,12 +38,14 @@
 </template>
 
 <script>
+const round = require('vue-round-filter');
+
 export default {
   name: 'Room',
   props: ['currentTemp', 'name'],
   data() {
     return {
-      tempSet: 0, // initial temp setted
+      tempSet: 22, // initial temp setted
     };
   },
   methods: {
@@ -51,6 +53,9 @@ export default {
       console.log('data is changed >>', this.tempSet);
       this.tempSet = (type === 'add') ? this.tempSet += 0.5 : this.tempSet -= 0.5;
     },
+  },
+  filters: {
+    round,
   },
 };
 </script>
@@ -79,8 +84,8 @@ input[type="number"] {
 
 
 .temp {
-  margin-top: 10px;
-  margin-left: 10px;
+  margin-top: 17px;
+  margin-left: 5px;
   margin-bottom: 10px;
   text-align: center;
   font-weight: bold;
@@ -105,6 +110,10 @@ input[type="number"] {
   background: #f1f1f1;
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
+  color: white;
+  text-shadow: 1px 1px 2px black, 0 0 25px DodgerBlue, 0 0 5px darkblue;
+	font-size: 20px;
+	font-weight: bold;
 }
 
 /* Create three unequal columns that floats next to each other */

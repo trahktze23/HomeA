@@ -9,7 +9,7 @@
 import HeaderMenu from '@/components/Menu';
 
 
-export default {
+export default {// exporta un obiect vue
   name: 'App',
   components: {
     HeaderMenu,

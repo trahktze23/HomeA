@@ -1,5 +1,5 @@
 <template>
-<div class="hello">
+<div class="home-page">
   <room v-for="room in rooms"
     v-bind:key="room.id"
     v-bind:name="room.name"

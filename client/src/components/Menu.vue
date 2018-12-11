@@ -1,34 +1,40 @@
 <template>
-
 <!-- <link rel="stylesheet" href="./font-awesome-4.7.0/
 font-awesome-4.7.0/font-awesome.min.css" >   -->
-
-
 <div class="topnav" id="myTopnav">
   <a href="#home"><i class="fa fa-fw fa-home"></i> Home</a>
   <a href="#fisiere"><i class="fa fa-fw fa-folder"> </i> Fisiere</a>
-  <a href="">
-    <i class="fa fa-fw fa-cog">
-    </i> Model spinners
-   </a>
-  <a href="Grafice"><i class="fa fa-fw fa-bar-chart"></i> Grafice</a>
+  <a href="#link"><i class="fa fa-fw fa-cog"></i> Setari</a>
+  <a href="#Grafice"><i class="fa fa-fw fa-bar-chart"></i> Grafice</a>
   <a href="harta.html"><i class="fa fa-fw fa-street-view"></i> Locatie</a>
   <a href="#logout"><i class="fa fa-fw fa-user"></i> LogOut</a>
   <a href="javascript:void(0);" class="icon" onclick="myFunction()"><i class="fa fa-bars"></i></a>
+  <link rel="stylesheet" type="text/css" href="/static/font-awesome-4.7.0/font-awesome-4.7.0/css/font-awesome.min.css">
 </div>
 </template>
 
 <script>
+function myFunction() {
+    var x = document.getElementById("myTopnav");
+    if (x.className === "topnav") {
+        x.className += " responsive";
+    } else {
+        x.className = "topnav";
+    }
+}
+
 export default {
   name: 'HeaderMenu',
   data() {
     return {};
   },
 };
-</script>
 
+
+</script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
 .topnav {
   overflow: hidden;
   background-color: DodgerBlue;
@@ -59,9 +65,7 @@ export default {
 }
 
 @media screen and (max-width: 600px) {
-  .topnav a:not(:first-child) {
-    display: none;
-  }
+  .topnav a:not(:first-child) {display: none;}
   .topnav a.icon {
     float: right;
     display: block;
@@ -69,9 +73,7 @@ export default {
 }
 
 @media screen and (max-width: 600px) {
-  .topnav.responsive {
-    position: relative;
-  }
+  .topnav.responsive {position: relative;}
   .topnav.responsive .icon {
     position: absolute;
     right: 0;
@@ -85,6 +87,7 @@ export default {
 }
 
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
+
 }
 </style>
