@@ -6,7 +6,11 @@
   "dependencies": {
     "babel-eslint": "^10.0.1",
     "chalk": "^2.4.1",
-    "express": "^4.16.4"
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "mysql": "^2.16.0",
+    "vue": "^2.5.17",
+    "ws": "^6.1.0"
   },
   "devDependencies": {
     "eslint": "^5.7.0",
