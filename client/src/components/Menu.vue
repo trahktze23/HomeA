@@ -9,19 +9,20 @@ font-awesome-4.7.0/font-awesome.min.css" >   -->
   <a href="harta.html"><i class="fa fa-fw fa-street-view"></i> Locatie</a>
   <a href="#logout"><i class="fa fa-fw fa-user"></i> LogOut</a>
   <a href="javascript:void(0);" class="icon" onclick="myFunction()"><i class="fa fa-bars"></i></a>
-  <link rel="stylesheet" type="text/css" href="/static/font-awesome-4.7.0/font-awesome-4.7.0/css/font-awesome.min.css">
+  <!-- <link rel="stylesheet" type="text/css"
+  href="/static/font-awesome-4.7.0/font-awesome-4.7.0/css/font-awesome.min.css"> -->
 </div>
 </template>
 
 <script>
-function myFunction() {
-    var x = document.getElementById("myTopnav");
-    if (x.className === "topnav") {
-        x.className += " responsive";
-    } else {
-        x.className = "topnav";
-    }
-}
+// function myFunction() {
+//   var x = document.getElementById('myTopnav');
+//   if (x.className === 'topnav') {
+//     x.className += 'responsive';
+//   } else {
+//     x.className = 'topnav';
+//   }
+// }
 
 export default {
   name: 'HeaderMenu',
@@ -29,8 +30,6 @@ export default {
     return {};
   },
 };
-
-
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>

@@ -8,7 +8,6 @@
 <script>
 import HeaderMenu from '@/components/Menu';
 
-
 export default {// exporta un obiect vue
   name: 'App',
   components: {

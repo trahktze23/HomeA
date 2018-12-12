@@ -67,7 +67,6 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
     -webkit-appearance: none;
     margin: 0;
 }
-
 input[type="number"] {
     -moz-appearance: textfield;
 }
@@ -81,8 +80,6 @@ input[type="number"] {
   width: 30%;
   overflow: visible;
 }
-
-
 .temp {
   margin-top: 17px;
   margin-left: 5px;
@@ -101,10 +98,7 @@ input[type="number"] {
   width: 90px;
   overflow: visible;
 }
-
-
 /* Container for columns and the top "toolbar" */
-
 .row {
   padding: 10px;
   background: #f1f1f1;
@@ -112,30 +106,23 @@ input[type="number"] {
   border-top-right-radius: 4px;
   color: white;
   text-shadow: 1px 1px 2px black, 0 0 25px DodgerBlue, 0 0 5px darkblue;
-	font-size: 20px;
-	font-weight: bold;
+  font-size: 20px;
+  font-weight: bold;
 }
-
 /* Create three unequal columns that floats next to each other */
-
 .column {
   float: left;
 }
-
 .left {
   width: 15%;
 }
-
 .right {
   width: 10%;
 }
-
 .middle {
   width: 75%;
 }
-
 /* Clear floats after the columns */
-
 .row:after {
   content: "";
   display: table;
@@ -143,7 +130,6 @@ input[type="number"] {
 }
 
 /* Three dots */
-
 .dot {
   margin-top: 4px;
   height: 12px;
@@ -154,7 +140,6 @@ input[type="number"] {
 }
 
 /* Three bars (hamburger menu) */
-
 .bar {
   width: 17px;
   height: 3px;
@@ -162,7 +147,6 @@ input[type="number"] {
   margin: 3px 0;
   display: block;
 }
-
 button {
   cursor: pointer;
   border-top-left-radius: 4px;
@@ -170,7 +154,6 @@ button {
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
 }
-
 input {
   color: #555;
   background-color: #fff;
@@ -178,7 +161,6 @@ input {
   border: 1px solid #ccc;
   text-align: center;
 }
-
 .handle-counter {
   margin-top: 15px;
   margin-bottom: 10px;
@@ -186,34 +168,27 @@ input {
   text-align: center;
   overflow: hidden;
 }
-
 .handle-counter .counter-minus,
 .handle-counter .counter-plus {
   text-align: center;
 }
-
 .handle-counter input {
   width: 50px;
   border-width: 2px;
-
 }
-
 .btn {
   padding: 6px 12px;
   border: 1px solid transparent;
   color: #fff;
 }
-
 .btn:disabled,
 .btn:disabled:hover {
   background-color: darkgrey;
   cursor: not-allowed;
 }
-
 .btn-primary {
   background-color: #009dda;
 }
-
 .btn-primary:hover,
 .btn-primary:focus {
   background-color: #0486b9;
@@ -225,7 +200,6 @@ input {
     width: 80%;
     padding: 0;
   }
-
 }
 
 @media only screen and (max-width:500px) {
