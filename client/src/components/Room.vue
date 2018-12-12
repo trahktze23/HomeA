@@ -15,7 +15,7 @@
   </div>
 
   <div class="temp">
-    <span> {{ currentTemp }} </span> &#8451;
+    <span> {{ currentTemp | round(2) }} </span> &#8451;
   </div>
 
   <div class="handle-counter" id="handleCounter">
@@ -38,7 +38,8 @@
 </template>
 
 <script>
-// const round = require('vue-round-filter');
+
+import round from 'vue-round-filter';
 
 export default {
   name: 'Room',
@@ -50,13 +51,13 @@ export default {
   },
   methods: {
     changeTemp(type) {
-      console.log('data is changed >>', this.tempSet);
+      // console.log('data is changed >>', this.tempSet);
       this.tempSet = (type === 'add') ? this.tempSet += 0.5 : this.tempSet -= 0.5;
     },
   },
-  // filters: {
-  //   round,
-  // },
+  filters: {
+    round,
+  },
 };
 </script>
 
