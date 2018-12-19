@@ -22,6 +22,10 @@
             "ArrowFunctionExpression": false,
             "FunctionExpression": false
         }
-    }]
+    }],
+   "import/newline-after-import": ["error", {
+      "count": false
+   }]
+
   }
 }

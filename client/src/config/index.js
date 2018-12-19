@@ -2,7 +2,16 @@ const baseUrl = 'http://localhost:8080'; // DEV ONLY
 const restUrl = '';
 const wsUrl = 'ws://danielsorinungureanu.go.ro:8080';
 
+const ws = new WebSocket(wsUrl); // create ws connection global
+// event emmited when connected
+ws.onopen = () => {
+  console.log('websocket is connected ...');
+  // sending a send event to websocket server
+  // ws.send('connected');
+};
+
 const config = {
+  ws,
 
   rooms: [
     {

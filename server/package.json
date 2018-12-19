@@ -1,7 +1,6 @@
 {
   "name": "node",
   "version": "1.0.0",
-  "description": "",
   "main": "test.js",
   "dependencies": {
     "babel-eslint": "^10.0.1",
@@ -9,6 +8,7 @@
     "cors": "^2.8.5",
     "express": "^4.16.4",
     "mysql": "^2.16.0",
+    "onoff": "^3.2.2",
     "vue": "^2.5.17",
     "ws": "^6.1.0"
   },
@@ -23,5 +23,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "keywords": [],
+  "description": ""
 }

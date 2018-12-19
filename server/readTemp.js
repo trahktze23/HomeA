@@ -24,25 +24,27 @@ module.exports = class {
       .then((data) => {
         // console.log('read temp data OK >>', data);
         const temp = data.replace(/\r?\n|\r/g, '').split('t=')[1];
-        // const formatTemp = temp /1000;
-        return temp;
+        const formatTemp = temp / 1000;
+        return formatTemp;
       }).catch((error) => {
         console.log('read temp data Error >>', error);
         return -1;
       });
   }
 
-  async sendTemp(sensorID) {
-    // send temp as an object { sensorID, temp}
-    // TODO change form id to name or send both
-    const temp = await this.getTemp(sensorID);
-    try {
-      this.ws.send(JSON.stringify({ sensorID, temp }));
-    } catch (err) {
-      console.log('send temp err >> ', err);
-    }
-  }
+  // async sendTemp(sensorID) {
+  //   // send temp as an object { sensorID, temp}
+  //   // TODO change form id to name or send both
+  //   const temp = await this.getTemp(sensorID);
+  //   try {
+  //     this.ws.send(JSON.stringify({ sensorID, temp }));
+  //   } catch (err) {
+  //     console.log('send temp err >> ', err);
+  //   }
+  // }
 };
 
 // # TODO ->TEST  instead of read from interval add watchers on files, see how often are updated
 // and read temp on change (debounce neded ??? )
+
+// not realy neccesarry but it can be done TODO return this as a singleton object

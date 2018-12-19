@@ -2,6 +2,15 @@
 // exports.config = {};
 module.exports = {
   prodMode: false,
+  // database config
+  dbConfig: {
+    host: 'localhost',
+    user: 'root',
+    password: '1234',
+    database: 'mydb',
+  },
+
+
   rooms: [
     {
       name: 'Dormitor Parter',

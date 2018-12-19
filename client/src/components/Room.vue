@@ -39,11 +39,14 @@
 
 <script>
 
+import config from '@/config';
 import round from 'vue-round-filter';
+
+const ws = config.ws;
 
 export default {
   name: 'Room',
-  props: ['currentTemp', 'name'],
+  props: ['currentTemp', 'name', 'id'],
   data() {
     return {
       tempSet: 22, // initial temp setted
@@ -53,6 +56,8 @@ export default {
     changeTemp(type) {
       // console.log('data is changed >>', this.tempSet);
       this.tempSet = (type === 'add') ? this.tempSet += 0.5 : this.tempSet -= 0.5;
+      console.log('change temp >> ', { sensorID: this.id, temp: this.tempSet, name: this.name });
+      ws.send(JSON.stringify({ sensorID: this.id, temp: this.tempSet }));
     },
   },
   filters: {

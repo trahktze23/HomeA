@@ -2,6 +2,7 @@
 <div class="home-page">
   <room v-for="room in rooms"
     v-bind:key="room.id"
+    v-bind:id="room.id"
     v-bind:name="room.name"
     v-bind:currentTemp="room.temp">
   </room>
@@ -14,20 +15,18 @@ import config from '@/config';
 // import ws from '@/services/websocket.service';
 // import webSockerService
 
-// setInterval(function(){
-//   config.rooms[0].temp += 1;
-// }, 5000);
-// event emmited when connected
-const ws = new WebSocket(config.wsUrl);
-ws.onopen = () => {
-  console.log('websocket is connected ...');
-  // sending a send event to websocket server
-  ws.send('connected');
-};
+// const ws = new WebSocket(config.wsUrl);
+const ws = config.ws;
+
 // event emmited when receiving message
 ws.onmessage = (ev) => {
-  console.log('message', ev);
-  config.rooms[0].temp = ev.data;
+  const data = JSON.parse(ev.data);
+  const receivedID = data.sensorID;
+  const receivedTemp = data.temp;
+  const room = config.rooms.find(el => el.id === receivedID);
+  if (room) {
+    room.temp = receivedTemp;
+  }
 };
 ws.onerror = (event) => {
   console.error('WebSocket error observed:', event);

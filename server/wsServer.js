@@ -5,11 +5,18 @@ const cors = require('cors');
 
 const { rooms, prodMode } = require('./config.js');
 const ReadTempCls = require('./readTemp.js');
+// database
+const DbHandlerCls = require('./dbHandler.js');
+const dbHandler = new DbHandlerCls();
+// pin control
+const PinsControlCls = require('./pinsControl.js');
+const pinsControl = new PinsControlCls();
 
+// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 const app = express();
 const server = http.createServer(app);
-let wss;
 // create the websocket server
+let wss;
 if (prodMode) {
   // wss for production
   wss = new WebSocket.Server({ server });
@@ -20,7 +27,7 @@ if (prodMode) {
   const WebSocketServer = WebSocket.Server;
   wss = new WebSocketServer({
     port: 8080,
-    headers: {
+    headers: { // not realy neccesarry ?
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Headers': '*',
       'Access-Control-Allow-Methods': 'PUT, GET, POST, DELETE, OPTIONS',
@@ -29,24 +36,35 @@ if (prodMode) {
   // !!!!!!!!!!!!! not for production
 }
 
+wss.on('connection', (socket) => {
+  console.log('new connection');
+  const tempReader = new ReadTempCls(socket);
+  socket.on('message', (message) => {
+    try {
+      const data = JSON.parse(message);
+      dbHandler.setTemp(data.sensorID, data.temp);
+    } catch (err) {
+      console.error('webSocket message error', err);
+    }
+  });
 
-wss.on('connection', (ws) => {
-  const tempReader = new ReadTempCls(ws);
-  // ws.on('message', (message) => {
-  // });
-  // console.log('connection OK');
+  socket.on('error', (err) => {
+    console.error('socket error', err);
+  });
+
   setInterval(
     () => {
       rooms.forEach((room) => {
-        tempReader.sendTemp(room.senzorID); // send an object { sensorID, temp}
-      // sau
-      // send an integer
-      // tempReader.getTemp(room.senzorID).then((temp)=>{
-      //   ws.send(temp);
-      // });
+        tempReader.getTemp(room.senzorID).then((temp) => {
+          socket.send(JSON.stringify({ sensorID: room.senzorID, temp }));
+        });
       });
-    }, 3000,
+    }, 2000,
   );
+});
+// listen for "error" event so that the whole app doesn't crash
+wss.on('error', (err) => {
+  console.log('web socket server error', err);
 });
 
 // for dev we can keep the server just for handling requests
