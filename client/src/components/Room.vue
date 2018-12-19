@@ -1,7 +1,10 @@
 <template>
 <div class="container">
   <div class="row">
-    <div class="column left"><span class="dot" style="background:red;"></span></div>
+    <div class="column left">
+      <span v-show="state === 1" class="dot" style="background:red;"></span>
+      <span v-show="state === 0" class="dot" style="background:green;"></span>
+    </div>
     <div class="column middle">
       <span>{{name}}</span>
     </div>
@@ -15,7 +18,7 @@
   </div>
 
   <div class="temp">
-    <span> {{ currentTemp | round(2) }} </span> &#8451;
+    <span> {{ currentTemp | round(1) }} </span> &#8451;
   </div>
 
   <div class="handle-counter" id="handleCounter">
@@ -24,7 +27,7 @@
       -
     </button>
     <input
-      v-model= "tempSet"
+      v-model= "tempSetDB"
       type="number"
       min="10"
       max="30"
@@ -46,18 +49,18 @@ const ws = config.ws;
 
 export default {
   name: 'Room',
-  props: ['currentTemp', 'name', 'id'],
+  props: ['currentTemp', 'name', 'id', 'state', 'tempSetDB'],
   data() {
     return {
-      tempSet: 22, // initial temp setted
+      // tempSetDB: 15, // initial temp setted
     };
   },
   methods: {
     changeTemp(type) {
-      // console.log('data is changed >>', this.tempSet);
-      this.tempSet = (type === 'add') ? this.tempSet += 0.5 : this.tempSet -= 0.5;
-      console.log('change temp >> ', { sensorID: this.id, temp: this.tempSet, name: this.name });
-      ws.send(JSON.stringify({ sensorID: this.id, temp: this.tempSet }));
+      // console.log('data is changed >>', this.tempSetDB);
+      this.tempSetDB = (type === 'add') ? this.tempSetDB += 0.5 : this.tempSetDB -= 0.5;
+      console.log('change temp >> ', { sensorID: this.id, temp: this.tempSetDB, name: this.name });
+      ws.send(JSON.stringify({ sensorID: this.id, temp: this.tempSetDB }));
     },
   },
   filters: {
@@ -120,13 +123,13 @@ input[type="number"] {
   float: left;
 }
 .left {
-  width: 15%;
+  width: 10%;
 }
 .right {
   width: 10%;
 }
 .middle {
-  width: 75%;
+  width: 70%;
 }
 /* Clear floats after the columns */
 .row:after {

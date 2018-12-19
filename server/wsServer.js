@@ -8,9 +8,9 @@ const ReadTempCls = require('./readTemp.js');
 // database
 const DbHandlerCls = require('./dbHandler.js');
 const dbHandler = new DbHandlerCls();
-// pin control
+// pin controller
 const PinsControlCls = require('./pinsControl.js');
-const pinsControl = new PinsControlCls();
+const pinsController = new PinsControlCls();
 
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 const app = express();
@@ -54,18 +54,37 @@ wss.on('connection', (socket) => {
 
   setInterval(
     () => {
-      rooms.forEach((room) => {
-        tempReader.getTemp(room.senzorID).then((temp) => {
-          socket.send(JSON.stringify({ sensorID: room.senzorID, temp }));
-        });
-      });
-    }, 2000,
+      rooms.forEach((room, ndx) => Promise.all([
+        tempReader.getTemp(room.senzorID),
+        dbHandler.getTemperatureSet(room.senzorID),
+      ]).then(([tempSensor, tempSetDB]) => {
+        socket.send(JSON.stringify(
+          {
+            sensorID: room.senzorID,
+            temp: tempSensor,
+            state: pinsController.getControlPinState(room.senzorID),
+            tempSetDB: Number(tempSetDB),
+          },
+        ));
+        if (ndx === rooms.length - 1) console.log('send data');
+      }));
+    }, 3500,
   );
 });
 // listen for "error" event so that the whole app doesn't crash
 wss.on('error', (err) => {
   console.log('web socket server error', err);
 });
+
+
+// test compaire remps
+setInterval(
+  () => {
+    rooms.forEach((room) => {
+      pinsController.compareTemps(room.senzorID);
+    });
+  }, 10000,
+);
 
 // for dev we can keep the server just for handling requests
 // app.use(express.static(`${__dirname}/`));

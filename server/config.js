@@ -10,13 +10,17 @@ module.exports = {
     database: 'mydb',
   },
 
-
   rooms: [
     {
-      name: 'Dormitor Parter',
+      name: 'TEST',
       senzorID: '28-000009b7fb69',
-      pinControl: 11,
+      pinControl: 3,
     },
+    // {
+    //   name: 'Dormitor Parter',
+    //   senzorID: '28-000009b7fb69',
+    //   pinControl: 11,
+    // },
     {
       name: 'Dormitor Roxi',
       senzorID: '28-000009b819fb',

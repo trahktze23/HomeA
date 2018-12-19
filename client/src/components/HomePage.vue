@@ -4,6 +4,8 @@
     v-bind:key="room.id"
     v-bind:id="room.id"
     v-bind:name="room.name"
+    v-bind:state="room.state"
+    v-bind:tempSetDB="room.tempSetDB"
     v-bind:currentTemp="room.temp">
   </room>
 </div>
@@ -21,11 +23,16 @@ const ws = config.ws;
 // event emmited when receiving message
 ws.onmessage = (ev) => {
   const data = JSON.parse(ev.data);
+  console.log('data > ', data);
   const receivedID = data.sensorID;
   const receivedTemp = data.temp;
+  const state = data.state;
+  const receivedTempSet = Number(data.tempSetDB);
   const room = config.rooms.find(el => el.id === receivedID);
   if (room) {
     room.temp = receivedTemp;
+    room.state = state;
+    room.tempSetDB = receivedTempSet;
   }
 };
 ws.onerror = (event) => {
