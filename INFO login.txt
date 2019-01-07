@@ -1,0 +1,7 @@
+user pi
+pass Bubulina*2140  sau ... *2104
+
+mysql
+
+user: root
+pass: 1234

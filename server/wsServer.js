@@ -1,4 +1,5 @@
 const http = require('http');
+const fs = require('fs');
 const express = require('express');
 const WebSocket = require('ws');
 const cors = require('cors');
@@ -35,10 +36,11 @@ if (prodMode) {
   });
   // !!!!!!!!!!!!! not for production
 }
+const tempReader = new ReadTempCls();
 
 wss.on('connection', (socket) => {
   console.log('new connection');
-  const tempReader = new ReadTempCls(socket);
+  // const tempReader = new ReadTempCls(socket);
   socket.on('message', (message) => {
     try {
       const data = JSON.parse(message);
@@ -51,25 +53,80 @@ wss.on('connection', (socket) => {
   socket.on('error', (err) => {
     console.error('socket error', err);
   });
+  socket.on('close', () => {
+    console.log('Closed Connection ');
+  });
 
-  setInterval(
-    () => {
-      rooms.forEach((room, ndx) => Promise.all([
-        tempReader.getTemp(room.senzorID),
-        dbHandler.getTemperatureSet(room.senzorID),
-      ]).then(([tempSensor, tempSetDB]) => {
-        socket.send(JSON.stringify(
-          {
-            sensorID: room.senzorID,
-            temp: tempSensor,
-            state: pinsController.getControlPinState(room.senzorID),
-            tempSetDB: Number(tempSetDB),
-          },
-        ));
-        if (ndx === rooms.length - 1) console.log('send data');
-      }));
-    }, 3500,
-  );
+  // const readData = () => { // eslint-disable-line
+  //   let inc = 0;
+  //   const date = new Date();
+  //   rooms.forEach((room) => {
+  //     fs.readFile(`/sys/bus/w1/devices/${room.senzorID}/w1_slave`, 'utf8', async (err, data) => {
+  //       try {
+  //         inc++;
+  //         const temp = data.replace(/\r?\n|\r/g, '').split('t=')[1];
+  //         if (temp > 0) {
+  //           if (socket.readyState === WebSocket.OPEN) {
+  //             socket.send(JSON.stringify(
+  //               {
+  //                 sensorID: room.senzorID,
+  //                 temp: temp / 1000,
+  //                 state: pinsController.getControlPinState(room.senzorID),
+  //                 tempSetDB: await dbHandler.getTemperatureSet(room.senzorID),
+  //               },
+  //             ));
+  //           }
+  //         }
+  //       } catch (e) {
+  //         console.log(`sensor error${room.senzorID} >> ${e}`);
+  //       }
+  //       if (inc === rooms.length) {
+  //         const date2 = new Date();
+  //         console.log('Trimite date', date2.getTime() - date.getTime());
+  //         if (socket.readyState === WebSocket.OPEN) {
+  //           setTimeout(() => {
+  //             // console.log('\033c'); // clear the console
+  //             console.log('DATE start > ', date);
+  //             readData();
+  //           }, 3000);
+  //         }
+  //       }
+  //     });
+  //   });
+  // }; // end of read data
+
+  const readData = () => { // eslint-disable-line
+    const rdpromarr = [];
+    // const date1 = new Date();
+    // console.log('START citire la', date1);
+    rooms.forEach((room) => {
+      rdpromarr.push(tempReader.getTemp(room));
+    });
+    Promise.all(rdpromarr).then((temps) => {
+      // const date2 = new Date();
+      // console.log('END s-a terminat citirea la', date2);
+      // console.log('durata', date2.getTime() - date1.getTime());
+      // console.log('VALUES', temps);
+      // console.log('');
+      if (socket.readyState === WebSocket.OPEN) {
+        // send data
+        temps.forEach(async (tempObj) => {
+          // console.log('#### >', tempObj);
+          socket.send(JSON.stringify(
+            {
+              sensorID: tempObj.room.senzorID,
+              temp: tempObj.temp,
+              state: pinsController.getControlPinState(tempObj.room.senzorID),
+              tempSetDB: await dbHandler.getTemperatureSet(tempObj.room.senzorID),
+            },
+          ));
+        });
+        setTimeout(() => readData(), 3000);
+      }
+    });
+  };
+
+  readData();
 });
 // listen for "error" event so that the whole app doesn't crash
 wss.on('error', (err) => {
@@ -77,20 +134,44 @@ wss.on('error', (err) => {
 });
 
 
-// test compaire remps
-setInterval(
-  () => {
-    rooms.forEach((room) => {
-      pinsController.compareTemps(room.senzorID);
-    });
-  }, 10000,
-);
+// // test compaire remps
+// setInterval(
+//   () => {
+//     rooms.forEach((room) => {
+//       pinsController.compareTemps(room.senzorID);
+//     });
+//   }, 10000,
+// );
+const compaire = () => { // eslint-disable-line
+  const rdpromarr = [];
+  // const date1 = new Date();
+  // console.log('@@@@@@@@@@@@@@@@@@@@@@');
+  // console.log('######################');
+  // console.log('START COMPAIRE la', date1);
+  rooms.forEach((room) => {
+    rdpromarr.push(pinsController.compareTemps(room));
+  });
+  Promise.all(rdpromarr).then(() => {
+    // const date2 = new Date();
+    // console.log('END s-a terminat COMPAIRE la', date2);
+    // console.log('durata', date2.getTime() - date1.getTime());
+    // console.log('@@@@@@@@@@@@@@@@@@@@@@');
+    // console.log('######################');
+    // console.log('');
+    // console.log('');
+    setTimeout(() => compaire(), 10000);
+  });
+};
+
+compaire();
 
 // for dev we can keep the server just for handling requests
-// app.use(express.static(`${__dirname}/`));
-// app.get('/', (req, res) => {
-//   res.send('test');
-// });
+app.use(express.static(`${__dirname}/`));
+app.get('/rooms', (req, res) => {
+  // res.send('test');
+  res.redirect('/');
+});
 
 console.log('your server is running at http://localhost:8081/'); //eslint-disable-line
+// app.listen(8080);
 app.listen(8081);

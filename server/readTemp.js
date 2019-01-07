@@ -8,6 +8,7 @@ const devicesPath = '/sys/bus/w1/devices/';
 module.exports = class {
   constructor(ws) {
     this.ws = ws;
+    // this.tempReaderMap = new Map();
   }
 
   readFile(path) { // eslint-disable-line class-methods-use-this
@@ -18,14 +19,26 @@ module.exports = class {
     return readFolder(path);
   }
 
+
+  // getTemp2(sensorID, reload = false) {
+  //   if (reload) {
+  //
+  //   }
+  //   const tempEl = this.tempReaderMap.get(sensorID);
+  // }
+
   // returns a promise that resolve with the temp or -1 when error
-  getTemp(sensorID) { // eslint-disable-line class-methods-use-this
-    return readFile(`${devicesPath + sensorID}/w1_slave`, 'utf8')
+  getTemp(room) { // eslint-disable-line class-methods-use-this
+    return readFile(`${devicesPath + room.senzorID}/w1_slave`, 'utf8')
       .then((data) => {
         // console.log('read temp data OK >>', data);
         const temp = data.replace(/\r?\n|\r/g, '').split('t=')[1];
         const formatTemp = temp / 1000;
-        return formatTemp;
+        // return formatTemp;
+        return {
+          room,
+          temp: formatTemp,
+        };
       }).catch((error) => {
         console.log('read temp data Error >>', error);
         return -1;

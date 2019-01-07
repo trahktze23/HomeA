@@ -1,5 +1,8 @@
-const fs = require('fs');
 
-fs.watch( 'wsServer.js', function ( curr, prev ) {
-   console.log('file changed ');
- });
+const express = require('express');
+const app = express();
+const port = 8081;
+
+app.get('/', (req, res) => res.send('Hello World!'));
+
+app.listen(port, () => console.log(`Example app listening on port ${port}!`));

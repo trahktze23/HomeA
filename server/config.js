@@ -1,26 +1,28 @@
 // const config = {};
 // exports.config = {};
 module.exports = {
+  // prodMode: true,
   prodMode: false,
   // database config
   dbConfig: {
     host: 'localhost',
-    user: 'root',
+    // user: 'root',
+    user: 'user',
     password: '1234',
     database: 'mydb',
   },
 
   rooms: [
+  //   {
+  //     name: 'TEST',
+  //     senzorID: '28-000009b7fb69',
+  //     pinControl: 3,
+  //   },
     {
-      name: 'TEST',
+      name: 'Dormitor Parter',
       senzorID: '28-000009b7fb69',
-      pinControl: 3,
+      pinControl: 11,
     },
-    // {
-    //   name: 'Dormitor Parter',
-    //   senzorID: '28-000009b7fb69',
-    //   pinControl: 11,
-    // },
     {
       name: 'Dormitor Roxi',
       senzorID: '28-000009b819fb',
