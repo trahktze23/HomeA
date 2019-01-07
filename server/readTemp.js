@@ -4,6 +4,7 @@ const fs = require('fs');
 const readFile = util.promisify(fs.readFile);
 const readFolder = util.promisify(fs.readdir);
 const devicesPath = '/sys/bus/w1/devices/';
+// const devicesPath = 'mock/';
 
 module.exports = class {
   constructor(ws) {

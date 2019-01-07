@@ -1,6 +1,9 @@
-const baseUrl = 'http://localhost:8080'; // DEV ONLY
+// const baseUrl = 'http://localhost:8080'; // DEV ONLY
+// const baseUrl = 'http://192.168.100.100:8081'; // DEV ONLY
+const baseUrl = 'http://danielsorinungureanu.go.ro:8081';
 const restUrl = '';
 const wsUrl = 'ws://danielsorinungureanu.go.ro:8080';
+// const wsUrl = 'ws://192.168.100.100:8080';
 
 const ws = new WebSocket(wsUrl); // create ws connection global
 // event emmited when connected

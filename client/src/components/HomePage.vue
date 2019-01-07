@@ -23,7 +23,7 @@ const ws = config.ws;
 // event emmited when receiving message
 ws.onmessage = (ev) => {
   const data = JSON.parse(ev.data);
-  console.log('data > ', data);
+  // console.log('data > ', data);
   const receivedID = data.sensorID;
   const receivedTemp = data.temp;
   const state = data.state;

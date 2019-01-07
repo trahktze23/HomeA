@@ -1,8 +1,6 @@
 <template>
 <div>
-  <!-- <div class="alert alert-info">
-    Username: test<br /> Password: test
-  </div> -->
+
   <h2>Login</h2>
   <form @submit.prevent="submitLogin">
     <div class="form-group">
@@ -27,15 +25,8 @@
 </template>
 
 <script>
-// import services from '@/services'; // get all the services
-//
-// const { loginService } = services;
 import loginService from '@/services/login.service';
-// import router from '@/router';
-// import Router from 'vue-router';
-
-
-// console.log('>>>>>>>>>>>>', loginService);
+import router from '@/router';
 
 export default {
   data() {
@@ -76,8 +67,7 @@ export default {
       if (username && password) {
         loginService.login(username, password).then((user) => {
           console.log('login succesfull >> ', user);
-          location.href = '/rooms';
-          // location.reload();
+          router.push('/rooms');
         });
         // dispatch('authentication/login', { username, password });
         // console.log('login now');

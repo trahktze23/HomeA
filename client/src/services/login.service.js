@@ -27,11 +27,11 @@ function handleLoginResponse(response) {
   });
 }
 
-function login(username, password) {
+function login(userLogin, password) {
   const requestOptions = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ username, password }),
+    body: JSON.stringify({ login: userLogin, password }),
   };
 
   return fetch(`${config.baseUrl}/users/authenticate`, requestOptions)

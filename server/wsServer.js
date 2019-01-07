@@ -2,6 +2,8 @@ const http = require('http');
 const fs = require('fs');
 const express = require('express');
 const WebSocket = require('ws');
+const bodyParser = require('body-parser');
+
 const cors = require('cors');
 
 const { rooms, prodMode } = require('./config.js');
@@ -16,6 +18,10 @@ const pinsController = new PinsControlCls();
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 const app = express();
 const server = http.createServer(app);
+app.use(bodyParser.json()); // to support JSON-encoded bodies
+app.use(bodyParser.urlencoded({ // to support URL-encoded bodies
+  extended: true,
+}));
 // create the websocket server
 let wss;
 if (prodMode) {
@@ -168,8 +174,16 @@ compaire();
 // for dev we can keep the server just for handling requests
 app.use(express.static(`${__dirname}/`));
 app.get('/rooms', (req, res) => {
-  // res.send('test');
   res.redirect('/');
+});
+
+app.post('/users/authenticate', (req, res) => {
+  const { login, password } = req.body;
+  dbHandler.getUser(login, password).then((user) => {
+    if (user) {
+      res.send(JSON.stringify({ user: { token: 'test' } }));
+    }
+  });
 });
 
 console.log('your server is running at http://localhost:8081/'); //eslint-disable-line
