@@ -1,8 +1,8 @@
 <template>
 <div class="home-page">
   <room v-for="room in rooms"
-    v-bind:key="room.id"
-    v-bind:id="room.id"
+    v-bind:key="room.senzorID"
+    v-bind:id="room.senzorID"
     v-bind:name="room.name"
     v-bind:state="room.state"
     v-bind:tempSetDB="room.tempSetDB"
@@ -28,7 +28,7 @@ ws.onmessage = (ev) => {
   const receivedTemp = data.temp;
   const state = data.state;
   const receivedTempSet = Number(data.tempSetDB);
-  const room = config.rooms.find(el => el.id === receivedID);
+  const room = config.rooms.find(el => el.senzorID === receivedID);
   if (room) {
     room.temp = receivedTemp;
     room.state = state;

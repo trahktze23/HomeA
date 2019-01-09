@@ -3,13 +3,27 @@
 import Vue from 'vue';
 import App from './App';
 import router from './router';
+import config from './config';
 
 Vue.config.productionTip = false;
 
-/* eslint-disable no-new */
-new Vue({
-  el: '#app',
-  router,
-  components: { App },
-  template: '<App/>',
+const requestOptions = {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({}),
+};
+fetch(`${config.baseUrl}/getRooms`, requestOptions).then((response) => {
+  response.text().then((rooms) => {
+    config.rooms = (JSON.parse(rooms)).rooms;
+    // ###############
+    new Vue({ // eslint-disable-line
+      el: '#app',
+      router,
+      components: { App },
+      template: '<App/>',
+    });
+    // ###############
+  });
 });
+
+/* eslint-disable no-new */

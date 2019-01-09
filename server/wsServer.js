@@ -109,15 +109,9 @@ wss.on('connection', (socket) => {
       rdpromarr.push(tempReader.getTemp(room));
     });
     Promise.all(rdpromarr).then((temps) => {
-      // const date2 = new Date();
-      // console.log('END s-a terminat citirea la', date2);
-      // console.log('durata', date2.getTime() - date1.getTime());
-      // console.log('VALUES', temps);
-      // console.log('');
       if (socket.readyState === WebSocket.OPEN) {
         // send data
         temps.forEach(async (tempObj) => {
-          // console.log('#### >', tempObj);
           socket.send(JSON.stringify(
             {
               sensorID: tempObj.room.senzorID,
@@ -184,6 +178,9 @@ app.post('/users/authenticate', (req, res) => {
       res.send(JSON.stringify({ user: { token: 'test' } }));
     }
   });
+});
+app.post('/getRooms', (req, res) => {
+  res.send(JSON.stringify({ rooms }));
 });
 
 console.log('your server is running at http://localhost:8081/'); //eslint-disable-line

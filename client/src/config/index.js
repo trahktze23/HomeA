@@ -15,69 +15,7 @@ ws.onopen = () => {
 
 const config = {
   ws,
-
-  rooms: [
-    {
-      name: 'Dormitor Parter',
-      id: '28-000009b7fb69',
-      temp: '',
-      state: 1,
-    },
-    {
-      name: 'Dormitor Roxi',
-      id: '28-000009b819fb',
-      temp: '',
-      state: 0,
-    },
-    {
-      name: 'Dormitor Diana',
-      id: '28-000009b7936f',
-      temp: '',
-      state: 1,
-    },
-    {
-      name: 'Dormitor C+D',
-      id: '28-000009b889ae',
-      temp: '',
-      state: 0,
-    },
-    {
-      name: 'Living',
-      id: '28-000009b86a72',
-      temp: '',
-      state: 1,
-    },
-    {
-      name: 'Bucatarie',
-      id: '28-000009b872d1',
-      temp: '',
-      state: 0,
-    },
-    {
-      name: 'Baie Etaj',
-      id: '28-000009b7ec8e',
-      temp: '',
-      state: 1,
-    },
-    {
-      name: 'Hol',
-      id: '28-000009b7a809',
-      temp: '',
-      state: 0,
-    },
-    {
-      name: 'Baie Parter',
-      id: '28-000009b7f619',
-      temp: '',
-      tate: 0,
-    },
-    {
-      name: 'C.T.',
-      id: '28-000009b86066',
-      temp: '',
-      state: 1,
-    },
-  ],
+  rooms: [],
   userStorage: localStorage,
   baseUrl,
   restUrl,
