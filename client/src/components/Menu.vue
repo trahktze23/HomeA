@@ -7,7 +7,7 @@ font-awesome-4.7.0/font-awesome.min.css" >   -->
   <a href="#link"><i class="fa fa-fw fa-cog"></i> Setari</a>
   <a href="#Grafice"><i class="fa fa-fw fa-bar-chart"></i> Grafice</a>
   <a href="harta.html"><i class="fa fa-fw fa-street-view"></i> Locatie</a>
-  <a href="#logout"><i class="fa fa-fw fa-user"></i> LogOut</a>
+  <a href="#logout" v-on:click="logOut()" ><i class="fa fa-fw fa-user"></i> LogOut</a>
   <a class="icon" v-on:click="showNav('add')" ><i class="fa fa-bars"></i></a>
   <!-- <link rel="stylesheet" type="text/css"
   href="/static/font-awesome-4.7.0/font-awesome-4.7.0/css/font-awesome.min.css"> -->
@@ -15,6 +15,7 @@ font-awesome-4.7.0/font-awesome.min.css" >   -->
 </template>
 
 <script>
+import loginService from '@/services/login.service';
 require('../../node_modules/font-awesome/css/font-awesome.min.css');
 
 export default {
@@ -28,6 +29,9 @@ export default {
     showNav() {
       this.showMenu = !this.showMenu;
     },
+    logOut(){
+      loginService.logout();
+    }
   },
 };
 </script>

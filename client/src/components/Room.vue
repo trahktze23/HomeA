@@ -52,15 +52,13 @@ export default {
   props: ['currentTemp', 'name', 'id', 'state', 'tempSetDB'],
   data() {
     return {
-      // tempSetDB: 15, // initial temp setted
     };
   },
   methods: {
     changeTemp(type) {
-      // console.log('data is changed >>', this.tempSetDB);
       this.tempSetDB = (type === 'add') ? this.tempSetDB += 0.5 : this.tempSetDB -= 0.5;
-      console.log('change temp >> ', { sensorID: this.id, temp: this.tempSetDB, name: this.name });
-      ws.send(JSON.stringify({ sensorID: this.id, temp: this.tempSetDB }));
+      console.log('change temp >> ', { senzorID: this.id, temp: this.tempSetDB, name: this.name });
+      ws.send(JSON.stringify({ senzorID: this.id, temp: this.tempSetDB }));
     },
   },
   filters: {

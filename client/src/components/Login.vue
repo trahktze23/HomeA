@@ -39,38 +39,18 @@ export default {
   computed: {
     loggingIn() {
       return false;
-      // return this.$store.state.authentication.status.loggingIn;
     },
   },
 
-  // beforeCreate() {
-  //   console.log('beforeCreated event', loginService.isLoggedIn());
-  //   if (loginService.isLoggedIn()) {
-  //     console.log('##### >> ', router);
-  //   }
-  // },
-  //
-  // // created() {
-  // beforeMount() {
-  //   console.log('created event');
-  //   // reset login status
-  //   // this.$store.dispatch('authentication/logout');
-  // },
-
   methods: {
     submitLogin() {
-    // submitLogin(e) {
-      // console.log('handel submission', e);
       this.submitted = true;
       const { username, password } = this;
-      // const { dispatch } = this.$store;
       if (username && password) {
         loginService.login(username, password).then((user) => {
           console.log('login succesfull >> ', user);
           router.push('/rooms');
         });
-        // dispatch('authentication/login', { username, password });
-        // console.log('login now');
       }
     },
   },

@@ -24,7 +24,7 @@ const ws = config.ws;
 ws.onmessage = (ev) => {
   const data = JSON.parse(ev.data);
   // console.log('data > ', data);
-  const receivedID = data.sensorID;
+  const receivedID = data.senzorID;
   const receivedTemp = data.temp;
   const state = data.state;
   const receivedTempSet = Number(data.tempSetDB);

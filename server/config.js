@@ -6,10 +6,10 @@ module.exports = {
   // database config
   dbConfig: {
     host: 'localhost',
-    // user: 'root',
-    // password: 'password',
-    user: 'user',
-    password: '1234',
+    user: 'root',
+    password: 'password',
+    // user: 'user',
+    // password: '1234',
     database: 'mydb',
   },
 
@@ -30,7 +30,7 @@ module.exports = {
     },
     {
       name: 'Dormitor Diana',
-      senzorID: '28-000009b7936f',
+      senzorID: '28-000009b7ec8e',
       pinControl: 13,
       temp: '',
       state: 0,
@@ -58,14 +58,14 @@ module.exports = {
     },
     {
       name: 'Baie Etaj',
-      senzorID: '28-000009b7ec8e',
-      pinControl: 13,
+      senzorID: '28-000009b7a809',
+      pinControl: 19,
       temp: '',
       state: 0,
     },
     {
       name: 'Hol',
-      senzorID: '28-000009b7a809',
+      senzorID: '28-000009b7936f',
       pinControl: 21,
       temp: '',
       state: 0,

@@ -3,8 +3,8 @@ const fs = require('fs');
 
 const readFile = util.promisify(fs.readFile);
 const readFolder = util.promisify(fs.readdir);
-const devicesPath = '/sys/bus/w1/devices/';
-// const devicesPath = 'mock/';
+// const devicesPath = '/sys/bus/w1/devices/';
+const devicesPath = 'mock/';
 
 module.exports = class {
   constructor(ws) {
@@ -19,14 +19,6 @@ module.exports = class {
   readFolder(path) { // eslint-disable-line class-methods-use-this
     return readFolder(path);
   }
-
-
-  // getTemp2(sensorID, reload = false) {
-  //   if (reload) {
-  //
-  //   }
-  //   const tempEl = this.tempReaderMap.get(sensorID);
-  // }
 
   // returns a promise that resolve with the temp or -1 when error
   getTemp(room) { // eslint-disable-line class-methods-use-this
@@ -45,20 +37,4 @@ module.exports = class {
         return -1;
       });
   }
-
-  // async sendTemp(sensorID) {
-  //   // send temp as an object { sensorID, temp}
-  //   // TODO change form id to name or send both
-  //   const temp = await this.getTemp(sensorID);
-  //   try {
-  //     this.ws.send(JSON.stringify({ sensorID, temp }));
-  //   } catch (err) {
-  //     console.log('send temp err >> ', err);
-  //   }
-  // }
 };
-
-// # TODO ->TEST  instead of read from interval add watchers on files, see how often are updated
-// and read temp on change (debounce neded ??? )
-
-// not realy neccesarry but it can be done TODO return this as a singleton object

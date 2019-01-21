@@ -4,7 +4,6 @@ import HomePage from '@/components/HomePage';
 import LoginPage from '@/components/Login';
 import loginService from '@/services/login.service';
 
-
 Vue.use(Router);
 
 // export default new Router({
@@ -42,6 +41,5 @@ router.beforeEach((to, from, next) => {
   }
   return next();
 });
-
 
 export default router;

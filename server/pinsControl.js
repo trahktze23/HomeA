@@ -4,7 +4,6 @@ const { rooms } = require('./config.js');
 const DbHandlerCls = require('./dbHandler.js');
 const ReadTempCls = require('./readTemp.js');
 
-
 module.exports = class {
   constructor() {
     this.rooms = rooms;
@@ -24,53 +23,45 @@ module.exports = class {
     });
   }
 
-  getControlPinState(sensorID) {
-    return this.controlPins[sensorID].readSync();
+  getControlPinState(senzorID) {
+    return this.controlPins[senzorID].readSync();
   }
 
-  setControlPinSTate(sensorID, value) { // eslint-disable-line consistent-return
+  setControlPinSTate(senzorID, value) { // eslint-disable-line consistent-return
     try {
-      return this.controlPins[sensorID].writeSync(value);
+      return this.controlPins[senzorID].writeSync(value);
     } catch (err) {
       console.log('ERR set control pins >> ', err);
     }
   }
 
   compareTemps(room) {
-    const sensorID = room.senzorID;
-    const pinNumber = room.pinControl;
+    const { senzorID } = room;
+    // const pinNumber = room.pinControl;
     return Promise.all([
       this.tempReader.getTemp(room),
-      this.dbHandler.getTemperatureSet(sensorID),
+      this.dbHandler.getTemperatureSet(senzorID),
     ]).then(([tempObj, tempDB]) => {
       const tempSensor = tempObj.temp;
-      // console.log('##### compaire temps');
-      // console.log('sensor id >> ', sensorID);
-      // console.log('tempSensor >>', tempSensor);
-      // console.log('tempDB >>', tempDB);
-      // console.log(' ');
       const tempCamera = Number(tempSensor);
       const tempDBSetata = Number(tempDB);
-      const pinState = this.getControlPinState(sensorID);
+      const pinState = this.getControlPinState(senzorID);
 
       if (tempCamera >= tempDBSetata) {
         if (Number(pinState) && tempCamera > tempDBSetata + 0.2) {
           console.log('Pin pus in 0', room.name);
-          this.setControlPinSTate(sensorID, 0);
+          this.setControlPinSTate(senzorID, 0);
         }
       }
       if (tempCamera < tempDBSetata) {
         if (Number(!pinState) && tempCamera < tempDBSetata - 0.2) {
           console.log('Pin pus in 1 > ', room.name);
-          this.setControlPinSTate(sensorID, 1);
+          this.setControlPinSTate(senzorID, 1);
         }
       }
-      // console.log(' ');
     });
   }
 };
-
-
 /*
   GPIO usage example
   const PIN = new Gpio(3, 'out'); // use GPIO pin 3 as output
