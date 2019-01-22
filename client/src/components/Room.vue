@@ -78,14 +78,12 @@ input[type="number"] {
     -moz-appearance: textfield;
 }
 .container {
-  margin-top: 10px;
-  margin-left: 10px;
   border: 3px solid #f1f1f1;
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
-  float: left;
   width: 30%;
-  overflow: visible;
+  box-sizing: border-box;
+  margin-bottom: 12px;
 }
 .temp {
   margin-top: 17px;
@@ -204,17 +202,17 @@ input {
 @media only screen and (max-width:800px) {
   /* For tablets: */
   .container {
-    width: 80%;
+    width: 100%;
     padding: 0;
   }
 }
 
 @media only screen and (max-width:500px) {
   /* For mobile phones: */
-  .menu,
+  /* .menu,
   .main,
   .right {
     width: 100%;
-  }
+  } */
 }
 </style>

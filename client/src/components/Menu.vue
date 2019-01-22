@@ -16,6 +16,7 @@ font-awesome-4.7.0/font-awesome.min.css" >   -->
 
 <script>
 import loginService from '@/services/login.service';
+
 require('../../node_modules/font-awesome/css/font-awesome.min.css');
 
 export default {
@@ -29,9 +30,9 @@ export default {
     showNav() {
       this.showMenu = !this.showMenu;
     },
-    logOut(){
+    logOut() {
       loginService.logout();
-    }
+    },
   },
 };
 </script>

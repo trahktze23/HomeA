@@ -3,6 +3,11 @@ import config from '@/config';
 const storage = config.userStorage;
 
 
+function logout() {
+  // remove user from local storage to log user out
+  storage.removeItem('user');
+  location.reload(true);
+}
 function handleLoginResponse(response) {
   return response.text().then((text) => {
     try {
@@ -24,11 +29,6 @@ function handleLoginResponse(response) {
   });
 }
 
-function logout() {
-  // remove user from local storage to log user out
-  storage.removeItem('user');
-  location.reload(true);
-}
 
 function login(userLogin, password) {
   const requestOptions = {

@@ -57,6 +57,12 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.home-page{
+  display: flex;
+  justify-content: space-between;
+  flex-flow: row wrap;
+  margin: 18px 10px 10px 10px;
+}
 h1,
 h2 {
   font-weight: normal;
