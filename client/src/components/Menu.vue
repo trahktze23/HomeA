@@ -2,12 +2,13 @@
 <!-- <link rel="stylesheet" href="./font-awesome-4.7.0/
 font-awesome-4.7.0/font-awesome.min.css" >   -->
 <div class="topnav" v-bind:class="{ responsive: showMenu }">
-  <a href="#home"><i class="fa fa-fw fa-home"></i> Home</a>
-  <a href="#fisiere"><i class="fa fa-fw fa-folder"> </i> Fisiere</a>
-  <a href="#link"><i class="fa fa-fw fa-cog"></i> Setari</a>
-  <a href="#Grafice"><i class="fa fa-fw fa-bar-chart"></i> Grafice</a>
-  <a href="harta.html"><i class="fa fa-fw fa-street-view"></i> Locatie</a>
-  <a href="#logout" v-on:click="logOut()" ><i class="fa fa-fw fa-user"></i> LogOut</a>
+  <a><i class="fa fa-fw fa-home menu-item"></i> Home</a>
+  <a><i class="fa fa-fw fa-folder menu-item"> </i> Fisiere</a>
+  <a><i class="fa fa-fw fa-cog menu-item"></i> Setari</a>
+  <a><i class="fa fa-fw fa-bar-chart menu-item"></i> Grafice</a>
+  <a href="harta.html"><i class="fa fa-fw fa-street-view menu-item"></i> Locatie</a>
+  <a v-on:click="logOut()" ><i class="fa fa-fw fa-user menu-item"></i> LogOut</a>
+
   <a class="icon" v-on:click="showNav('add')" ><i class="fa fa-bars"></i></a>
   <!-- <link rel="stylesheet" type="text/css"
   href="/static/font-awesome-4.7.0/font-awesome-4.7.0/css/font-awesome.min.css"> -->
@@ -54,6 +55,7 @@ export default {
 .topnav a:hover {
   background-color: #ddd;
   color: black;
+  cursor: pointer;
 }
 .active {
   background-color: DodgerBlue;

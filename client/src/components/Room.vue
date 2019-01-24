@@ -1,15 +1,14 @@
 <template>
 <div class="container">
   <div class="row">
-    <div class="column left">
-      <span v-show="state === 1" class="dot" style="background:red;"></span>
-      <span v-show="state === 0" class="dot" style="background:green;"></span>
+    <div>
+      <span class="redDot dot" v-bind:class="{ 'greenDot': state }" ></span>
     </div>
-    <div class="column middle">
+    <div>
       <span>{{name}}</span>
     </div>
-    <div class="column right">
-      <div style="float:right;">
+    <div>
+      <div>
         <span class="bar"></span>
         <span class="bar"></span>
         <span class="bar"></span>
@@ -17,26 +16,29 @@
     </div>
   </div>
 
-  <div class="temp">
-    <span> {{ currentTemp | round(1) }} </span> &#8451;
+  <div class='data-row'>
+    <div class="temp">
+      <span> {{ currentTemp | round(1) }} </span> &#8451;
+    </div>
+    <div class="handle-counter" id="handleCounter">
+      <button v-on:click="changeTemp('substract')"
+        class="counter-minus btn btn-primary">
+        -
+      </button>
+      <input
+        v-model= "tempSetDB"
+        type="number"
+        class="db-temp"
+        min="10"
+        max="30"
+        step="0.5">
+      <button v-on:click="changeTemp('add')"
+      class="counter-minus btn btn-primary">
+        +
+      </button>
+    </div>
   </div>
 
-  <div class="handle-counter" id="handleCounter">
-    <button v-on:click="changeTemp('substract')"
-      class="counter-minus btn btn-primary">
-      -
-    </button>
-    <input
-      v-model= "tempSetDB"
-      type="number"
-      min="10"
-      max="30"
-      step="0.5">
-    <button v-on:click="changeTemp('add')"
-    class="counter-minus btn btn-primary">
-      +
-    </button>
-  </div>
 </div>
 </template>
 
@@ -77,31 +79,29 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 input[type="number"] {
     -moz-appearance: textfield;
 }
+
+.redDot{
+  background: red;
+}
+.greenDot{
+  background: #18f318;
+}
+
 .container {
   border: 3px solid #f1f1f1;
-  border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
+  border-radius: 4px;
   width: 30%;
   box-sizing: border-box;
   margin-bottom: 12px;
+  min-width:240px;
 }
 .temp {
-  margin-top: 17px;
-  margin-left: 5px;
-  margin-bottom: 10px;
-  text-align: center;
   font-weight: bold;
-  font-size-adjust: 0.78;
   padding: 2px;
   color: DodgerBlue;
   border: 1px solid DodgerBlue;
-  border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
-  border-bottom-left-radius: 4px;
-  border-bottom-right-radius: 4px;
-  float: left;
-  width: 90px;
-  overflow: visible;
+  border-radius: 4px;
+  width: 75px;
 }
 /* Container for columns and the top "toolbar" */
 .row {
@@ -113,33 +113,20 @@ input[type="number"] {
   text-shadow: 1px 1px 2px black, 0 0 25px DodgerBlue, 0 0 5px darkblue;
   font-size: 20px;
   font-weight: bold;
+  display: flex;
+  justify-content: space-between;
 }
-/* Create three unequal columns that floats next to each other */
-.column {
-  float: left;
-}
-.left {
-  width: 10%;
-}
-.right {
-  width: 10%;
-}
-.middle {
-  width: 70%;
-}
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
+
+.data-row{display: flex;
+  justify-content: space-around;
+  min-height: 52px;
+  align-items: center;
 }
 
 /* Three dots */
 .dot {
-  margin-top: 4px;
-  height: 12px;
-  width: 12px;
-  background-color: blue;
+  height: 14px;
+  width: 14px;
   border-radius: 50%;
   display: inline-block;
 }
@@ -154,29 +141,16 @@ input[type="number"] {
 }
 button {
   cursor: pointer;
-  border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
-  border-bottom-left-radius: 4px;
-  border-bottom-right-radius: 4px;
+  border-radius: 4px;
 }
-input {
+input.db-temp {
   color: #555;
-  background-color: #fff;
-  background-image: none;
   border: 1px solid #ccc;
   text-align: center;
+  padding: 5px;
+  border-radius: 4px;
 }
-.handle-counter {
-  margin-top: 15px;
-  margin-bottom: 10px;
-  display: block;
-  text-align: center;
-  overflow: hidden;
-}
-.handle-counter .counter-minus,
-.handle-counter .counter-plus {
-  text-align: center;
-}
+
 .handle-counter input {
   width: 50px;
   border-width: 2px;
