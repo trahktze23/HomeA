@@ -1,5 +1,7 @@
 // const baseUrl = 'http://localhost:8080'; // DEV ONLY
-const baseUrl = 'http://192.168.100.100:8081'; // DEV ONLY
+// const baseUrl = 'http://192.168.100.100:8081'; // DEV ONLY
+const baseUrl = ''; // DEV ONLY
+// const baseUrl = '/data'; // DEV ONLY
 const wsUrl = 'ws://192.168.100.100:8080';
 
 const restUrl = '';

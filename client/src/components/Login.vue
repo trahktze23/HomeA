@@ -28,36 +28,36 @@
 </template>
 
 <script>
-  import loginService from '@/services/login.service';
-  import router from '@/router';
+import loginService from '@/services/login.service';
+import router from '@/router';
 
-  export default {
-    data() {
-      return {
-        username: '',
-        password: '',
-        submitted: false,
-      };
+export default {
+  data() {
+    return {
+      username: '',
+      password: '',
+      submitted: false,
+    };
+  },
+  computed: {
+    loggingIn() {
+      return false;
     },
-    computed: {
-      loggingIn() {
-        return false;
-      },
-    },
+  },
 
-    methods: {
-      submitLogin() {
-        this.submitted = true;
-        const { username, password } = this;
-        if (username && password) {
-          loginService.login(username, password).then((user) => {
-            console.log('login succesfull >> ', user);
-            router.push('/rooms');
-          });
-        }
-      },
+  methods: {
+    submitLogin() {
+      this.submitted = true;
+      const { username, password } = this;
+      if (username && password) {
+        loginService.login(username, password).then((user) => {
+          console.log('login succesfull >> ', user);
+          router.push('/rooms');
+        });
+      }
     },
-  };
+  },
+};
 </script>
 
 <style scoped>
