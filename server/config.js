@@ -13,6 +13,17 @@ module.exports = {
     database: 'mydb',
   },
 
+  pwmConfig:{
+    startTime: 10*1000,
+    downTime: 5*1000,
+    upTime: 5*1000,
+  },
+  // pwmConfig:{
+  //   startTime: 5*60*1000,
+  //   downTime: 1*60*1000,
+  //   upTime: 1*60*1000,
+  // },
+
   rooms: [
     {
       name: 'Dormitor Parter',

@@ -39,7 +39,8 @@ module.exports = class {
     const { senzorID } = room;
     // const pinNumber = room.pinControl;
     return Promise.all([
-      this.tempReader.getTemp(room),
+      // this.tempReader.getTemp(room),
+      this.tempReader.getCachedTemp({room}).promise,
       this.dbHandler.getTemperatureSet(senzorID),
     ]).then(([tempObj, tempDB]) => {
       const tempSensor = tempObj.temp;
