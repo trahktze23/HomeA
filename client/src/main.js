@@ -14,6 +14,7 @@ const requestOptions = {
 };
 fetch(`${config.baseUrl}/getRooms`, requestOptions).then((response) => {
   response.text().then((rooms) => {
+    console.log('ROOMS', rooms);
     config.rooms = (JSON.parse(rooms)).rooms;
     // ###############
     new Vue({ // eslint-disable-line

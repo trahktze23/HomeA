@@ -22,6 +22,9 @@
       <div class="form-group">
         <input type="submit" :disabled="loggingIn" class="login login-submit" value="login">
       </div>
+      <div v-show="submitted && errorLogin" class="error-login">
+        <span>Wrong credentials</span>
+      </div>
     </form>
   </div>
 </div>
@@ -37,6 +40,7 @@ export default {
       username: '',
       password: '',
       submitted: false,
+      errorLogin: false,
     };
   },
   computed: {
@@ -51,8 +55,11 @@ export default {
       const { username, password } = this;
       if (username && password) {
         loginService.login(username, password).then((user) => {
-          console.log('login succesfull >> ', user);
-          router.push('/rooms');
+          if (user) {
+            router.push('/rooms');
+          } else {
+            this.errorLogin = true;
+          }
         });
       }
     },
@@ -107,6 +114,13 @@ export default {
   border: 0px;
   text-shadow: 0 1px rgba(0,0,0,0.3);
   background-color: #357ae8;
+}
+.error-login{
+  color: red;
+  position: absolute;
+  margin: auto;
+  left: 0;
+  right: 0;
 }
 
 </style>

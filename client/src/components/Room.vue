@@ -15,23 +15,16 @@
       </div>
     </div>
   </div>
-
   <div class='data-row'>
     <div class="temp">
       <span> {{ currentTemp | round(1) }} </span> &#8451;
     </div>
-    <div class="handle-counter" id="handleCounter">
+    <div class="handle-counter">
       <button v-on:click="changeTemp('substract')"
         class="counter-minus btn btn-primary">
         -
       </button>
-      <input
-        v-model= "tempSetDB"
-        type="number"
-        class="db-temp"
-        min="10"
-        max="30"
-        step="0.5">
+      <span class="db-temp">  {{tempSetDB}}  </span>
       <button v-on:click="changeTemp('add')"
       class="counter-minus btn btn-primary">
         +
@@ -71,15 +64,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-/* Hide HTML5 Up and Down arrows. */
-input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-input[type="number"] {
-    -moz-appearance: textfield;
-}
-
 .redDot{
   background: red;
 }
@@ -125,8 +109,8 @@ input[type="number"] {
 
 /* Three dots */
 .dot {
-  height: 14px;
-  width: 14px;
+  height: 15px;
+  width: 15px;
   border-radius: 50%;
   display: inline-block;
 }
@@ -143,18 +127,20 @@ button {
   cursor: pointer;
   border-radius: 4px;
 }
-input.db-temp {
+.handle-counter{
+  display: flex;
+}
+.db-temp {
   color: #555;
   border: 1px solid #ccc;
-  text-align: center;
-  padding: 5px;
+  padding: 4px;
   border-radius: 4px;
-}
-
-.handle-counter input {
   width: 50px;
   border-width: 2px;
+  margin: 0 1px;
 }
+
+
 .btn {
   padding: 6px 12px;
   border: 1px solid transparent;

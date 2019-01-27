@@ -14,33 +14,6 @@
 <script>
 import Room from '@/components/Room';
 import config from '@/config';
-// import ws from '@/services/websocket.service';
-// import webSockerService
-
-// const ws = new WebSocket(config.wsUrl);
-const ws = config.ws;
-
-// event emmited when receiving message
-ws.onmessage = (ev) => {
-  const data = JSON.parse(ev.data);
-  // console.log('data > ', data);
-  const receivedID = data.senzorID;
-  const receivedTemp = data.temp;
-  const state = data.state;
-  const receivedTempSet = Number(data.tempSetDB);
-  const room = config.rooms.find(el => el.senzorID === receivedID);
-  if (room) {
-    room.temp = receivedTemp;
-    room.state = state;
-    room.tempSetDB = receivedTempSet;
-  }
-};
-ws.onerror = (event) => {
-  console.error('WebSocket error observed:', event);
-};
-ws.onclose = (event) => {
-  console.log('WebSocket is closed now.', event);
-};
 
 export default {
   name: 'Test',
@@ -52,6 +25,29 @@ export default {
       rooms: config.rooms,
     };
   },
+  mounted() {
+    const ws = config.ws;
+
+    ws.onmessage = (ev) => {
+      const data = JSON.parse(ev.data);
+      const receivedID = data.senzorID;
+      const receivedTemp = data.temp;
+      const state = data.state;
+      const receivedTempSet = Number(data.tempSetDB);
+      const room = config.rooms.find(el => el.senzorID === receivedID);
+      if (room) {
+        room.temp = receivedTemp;
+        room.state = state;
+        room.tempSetDB = receivedTempSet;
+      }
+    };
+    ws.onerror = (event) => {
+      console.error('WebSocket error observed:', event);
+    };
+    ws.onclose = (event) => {
+      console.log('WebSocket is closed now.', event);
+    };
+  }, // end of mounted event
 };
 </script>
 
